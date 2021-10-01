@@ -20,7 +20,7 @@ target/
 *.ipr
 
 ### NetBeans ###
-/nbproject/private/
+/nbproject/private/18:45 01/10/2021
 /nbbuild/
 /dist/
 /nbdist/
@@ -33,4 +33,3 @@ build/
 .vscode/
 
 ### Arquivo Properties ###
-src/main/resources/
