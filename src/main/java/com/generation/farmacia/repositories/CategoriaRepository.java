@@ -10,6 +10,11 @@ import com.generation.farmacia.models.Categoria;
 @Repository
 public class CategoriaRepository extends JpaRepository <Categoria, Long>{
 		
-	
+	/**
+	 *@author George
+	 *@since 1.0
+	 */
+	public List<Categoria> findAllByDescricaoCategoriaContainingIgnoreCase(String descricaoCategoria);
+
 
 }
