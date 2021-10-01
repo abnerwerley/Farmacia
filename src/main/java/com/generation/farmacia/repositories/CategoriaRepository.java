@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.generation.farmacia.models.Categoria;
 
 @Repository
-public class CategoriaRepository extends JpaRepository <Categoria, Long>{
+public interface CategoriaRepository extends JpaRepository <Categoria, Long>{
 		
 	/**
 	 *@author George
