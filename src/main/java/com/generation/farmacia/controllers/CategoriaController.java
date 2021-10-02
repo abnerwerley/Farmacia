@@ -39,6 +39,7 @@ public class CategoriaController {
 	 * 
 	 * @return Lista com todas as categorias
 	 */
+	
 	@GetMapping("/todos")
 	public ResponseEntity<List<Categoria>> getAll() {
 		List<Categoria> Lista = repositorio.findAll();
@@ -54,8 +55,9 @@ public class CategoriaController {
 	 * Retorna a Categoria com o idCategoria
 	 * 
 	 * @param idCategoria
-	 * @return
+	 * @return os dados de acordo com o ID selecionado
 	 */
+	
 	@GetMapping("/{id_categoria}")
 	public ResponseEntity<Categoria> getById(@PathVariable(value = "id_categoria") Long idCategoria) {
 		Optional<Categoria> objetoOptional = repositorio.findById(idCategoria);
@@ -66,6 +68,13 @@ public class CategoriaController {
 			return ResponseEntity.status(204).build();
 		}
 	}
+	
+	/**
+	 * Retorna Lista da descrição de categoria desejada
+	 * 
+	 * @param descricaoCategoria
+	 * @return Retorna a lista de descrição de categorias com parametro escolhido
+	 */
 
 	@GetMapping("/descricao/{descricao_categoria}")
 	public ResponseEntity<List<Categoria>> getAllByDescricaoCategoria(
@@ -78,16 +87,37 @@ public class CategoriaController {
 			return ResponseEntity.status(200).body(Lista);
 		}
 	}
+	
+	/**
+	 * Retorna os dados salvos no banco
+	 * 
+	 * @param novaCategoria
+	 * @return Salva e retorna os dados salvos
+	 */
 
 	@PostMapping("/salvar")
 	public ResponseEntity<Categoria> salvar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
+	
+	/**
+	 * Atualiza os dados salvos no banco
+	 * 
+	 * @param novaCategoria
+	 * @return atualiza e mostra os dados atualizados
+	 */
 
 	@PutMapping("/atualizar")
 	public ResponseEntity<Categoria> atualizar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
+	
+	/**
+	 * Deleta os dados selecionados no banco
+	 * 
+	 * @param idCategoria
+	 * @return deleta os dados selecionados pelo id correspondente
+	 */
 
 	@DeleteMapping("/deletar/{id_categoria}")
 	public ResponseEntity<Categoria> deletar(@PathVariable(value = "id_categoria") Long idCategoria) {
