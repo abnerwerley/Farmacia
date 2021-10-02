@@ -14,28 +14,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	/**
 	 * Metodo utilizado para retornar pesquisa pela coluna nomeProdutos
 	 * 
-	 * @param nomeProduto
-	 * @return Lista com todos os produtos
-	 * @author Abner
-	 * @since 1.0
-	 */
-
-	// public List<Produto> findAll(String nomeProduto);
-
-	/**
-	 * Metodo utilizado para retornar pesquisa pela coluna nomeProdutos
-	 * 
-	 * @param idProduto
-	 * @return Lista com todos os produtos
-	 * @author Abner
-	 * @since 1.0
-	 */
-
-	public Optional<Produto> findById(Long idProduto);
-
-	/**
-	 * Metodo utilizado para retornar pesquisa pela coluna nomeProdutos
-	 * 
 	 * @param nomeProdutos
 	 * @return Lista com nome dos produtos
 	 * @author Abner
