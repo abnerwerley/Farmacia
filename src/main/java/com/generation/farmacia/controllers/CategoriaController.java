@@ -1,10 +1,18 @@
 package com.generation.farmacia.controllers;
 
+/**
+ * Métodos CRUD de Categoria
+ * 
+ * @author Daniel
+ * @since 1.0
+ * 
+ */
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,57 +31,69 @@ import com.generation.farmacia.repositories.CategoriaRepository;
 @RequestMapping("/api/v1/categoria")
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 public class CategoriaController {
-	
-	private CategoriaRepository repositorio;
-	
+
+	private @Autowired CategoriaRepository repositorio;
+
+	/**
+	 * Retonra a lista com todas as Categorias
+	 * 
+	 * @return Lista com todas as categorias
+	 */
 	@GetMapping("/todos")
-	public ResponseEntity<List<Categoria>> GetByAll() {
+	public ResponseEntity<List<Categoria>> getAll() {
 		List<Categoria> Lista = repositorio.findAll();
-		
+
 		if (Lista.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		} else {
 			return ResponseEntity.status(200).body(Lista);
 		}
 	}
-	
+
+	/**
+	 * Retorna a Categoria com o idCategoria
+	 * 
+	 * @param idCategoria
+	 * @return
+	 */
 	@GetMapping("/{id_categoria}")
-	public ResponseEntity<Categoria> GetById(@PathVariable(value = "id_categoria") Long idCategoria) {
+	public ResponseEntity<Categoria> getById(@PathVariable(value = "id_categoria") Long idCategoria) {
 		Optional<Categoria> objetoOptional = repositorio.findById(idCategoria);
-		
-		if(objetoOptional.isPresent()) {
+
+		if (objetoOptional.isPresent()) {
 			return ResponseEntity.status(200).body(objetoOptional.get());
 		} else {
 			return ResponseEntity.status(204).build();
 		}
 	}
-	
-	@GetMapping("/{descricao_categoria}")
-	public ResponseEntity<List<Categoria>> GetByDescricaoCategoria(@PathVariable(value = "descricao_categoria") String descricaoCategoria) {
+
+	@GetMapping("/descricao/{descricao_categoria}")
+	public ResponseEntity<List<Categoria>> getAllByDescricaoCategoria(
+			@PathVariable(value = "descricao_categoria") String descricaoCategoria) {
 		List<Categoria> Lista = repositorio.findAllByDescricaoCategoriaContainingIgnoreCase(descricaoCategoria);
-		
-		if(Lista.isEmpty()) {
+
+		if (Lista.isEmpty()) {
 			return ResponseEntity.status(204).build();
 		} else {
 			return ResponseEntity.status(200).body(Lista);
 		}
 	}
-	
+
 	@PostMapping("/salvar")
 	public ResponseEntity<Categoria> salvar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
-	
-	@PutMapping("/Atualizar")
+
+	@PutMapping("/atualizar")
 	public ResponseEntity<Categoria> atualizar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
-	
+
 	@DeleteMapping("/deletar/{id_categoria}")
 	public ResponseEntity<Categoria> deletar(@PathVariable(value = "id_categoria") Long idCategoria) {
 		Optional<Categoria> objetoOptional = repositorio.findById(idCategoria);
-		
-		if(objetoOptional.isEmpty()) {
+
+		if (objetoOptional.isPresent()) {
 			repositorio.deleteById(idCategoria);
 			return ResponseEntity.status(204).build();
 		} else {
