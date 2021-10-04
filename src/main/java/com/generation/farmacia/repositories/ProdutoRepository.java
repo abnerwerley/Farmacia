@@ -20,6 +20,16 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	 * @since 1.0
 	 */
 
-	public List<Produto> findByNomeProdutoContainingIgnoreCase(String nomeProduto);
+	public List<Produto> findAllByNomeProdutoContainingIgnoreCase(String nomeProduto);
+
+	/**
+	 * Metodo utilizado para retornar os produtos pela coluna preço
+	 * 
+	 * @param preco
+	 * @return Lista com os produtos a partir do preco
+	 * @author gustavo
+	 * @since 1.0
+	 */
+	public List<Produto> findAllByPrecoContainingIgnoreCase(Long preco);
 
 }
