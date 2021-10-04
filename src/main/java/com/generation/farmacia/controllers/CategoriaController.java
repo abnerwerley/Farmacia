@@ -39,7 +39,7 @@ public class CategoriaController {
 	 * 
 	 * @return Lista com todas as categorias
 	 */
-	
+
 	@GetMapping("/todos")
 	public ResponseEntity<List<Categoria>> getAll() {
 		List<Categoria> Lista = repositorio.findAll();
@@ -57,7 +57,7 @@ public class CategoriaController {
 	 * @param idCategoria
 	 * @return os dados de acordo com o ID selecionado
 	 */
-	
+
 	@GetMapping("/{id_categoria}")
 	public ResponseEntity<Categoria> getById(@PathVariable(value = "id_categoria") Long idCategoria) {
 		Optional<Categoria> objetoOptional = repositorio.findById(idCategoria);
@@ -68,18 +68,18 @@ public class CategoriaController {
 			return ResponseEntity.status(204).build();
 		}
 	}
-	
+
 	/**
-	 * Retorna Lista da descrição de categoria desejada
+	 * Retorna Lista com os nomes das categorias desejadas
 	 * 
-	 * @param descricaoCategoria
-	 * @return Retorna a lista de descrição de categorias com parametro escolhido
+	 * @param nomeCategoria
+	 * @return Retorna a lista de nome de categorias com parametro escolhido
 	 */
 
-	@GetMapping("/descricao/{descricao_categoria}")
-	public ResponseEntity<List<Categoria>> getAllByDescricaoCategoria(
-			@PathVariable(value = "descricao_categoria") String descricaoCategoria) {
-		List<Categoria> Lista = repositorio.findAllByDescricaoCategoriaContainingIgnoreCase(descricaoCategoria);
+	@GetMapping("/nome/{nome_categoria}")
+	public ResponseEntity<List<Categoria>> getAllByNomeCategoria(
+			@PathVariable(value = "nome_categoria") String nomeCategoria) {
+		List<Categoria> Lista = repositorio.findAllByNomeCategoriaContainingIgnoreCase(nomeCategoria);
 
 		if (Lista.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -87,7 +87,7 @@ public class CategoriaController {
 			return ResponseEntity.status(200).body(Lista);
 		}
 	}
-	
+
 	/**
 	 * Retorna os dados salvos no banco
 	 * 
@@ -99,7 +99,7 @@ public class CategoriaController {
 	public ResponseEntity<Categoria> salvar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
-	
+
 	/**
 	 * Atualiza os dados salvos no banco
 	 * 
@@ -111,7 +111,7 @@ public class CategoriaController {
 	public ResponseEntity<Categoria> atualizar(@Valid @RequestBody Categoria novaCategoria) {
 		return ResponseEntity.status(201).body(repositorio.save(novaCategoria));
 	}
-	
+
 	/**
 	 * Deleta os dados selecionados no banco
 	 * 
