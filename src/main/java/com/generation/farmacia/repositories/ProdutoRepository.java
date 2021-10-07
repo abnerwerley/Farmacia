@@ -31,7 +31,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	 * @since 1.0
 	 */
 
-	// public List<Produto> findAllByPrecoContainingIgnoreCase(Double preco);
+	public List<Produto> findAllByPreco(Double preco);
 
 	/**
 	 * Metodo utilizado para retornar produto pela coluna IdProduto

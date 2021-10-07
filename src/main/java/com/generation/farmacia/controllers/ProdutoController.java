@@ -54,11 +54,11 @@ public class ProdutoController {
 		return ResponseEntity.ok(repositorio.findAllByNomeProdutoContainingIgnoreCase(nomeProduto));
 	}
 
-	/*
-	 * @GetMapping("/produto/{preco}") public ResponseEntity<List<Produto>>
-	 * getAllByPreco(@PathVariable Double preco) { return
-	 * ResponseEntity.ok(repositorio.findAllByPrecoContainingIgnoreCase(preco)); }
-	 */
+	@GetMapping("/produto/{preco}")
+	public ResponseEntity<List<Produto>> getAllByPreco(@PathVariable Double preco) {
+		return ResponseEntity.ok(repositorio.findAllByPreco(preco));
+	}
+
 	@PostMapping("/salvar")
 	public ResponseEntity<Produto> salvar(@Valid @RequestBody Produto novoProduto) {
 		return ResponseEntity.status(201).body(repositorio.save(novoProduto));
