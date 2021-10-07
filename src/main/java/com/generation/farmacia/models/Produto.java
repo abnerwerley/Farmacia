@@ -29,9 +29,7 @@ public class Produto {
 	private String tipoProduto;
 
 	@ManyToOne
-
 	@JoinColumn(name = "id_categoria")
-
 	@JsonIgnoreProperties({ "produto" })
 	private Categoria categoriaRelacionada;
 
@@ -74,8 +72,5 @@ public class Produto {
 	public void setCategoriaRelacionada(Categoria categoriaRelacionada) {
 		this.categoriaRelacionada = categoriaRelacionada;
 	}
-	
-	
-	
 
 }
